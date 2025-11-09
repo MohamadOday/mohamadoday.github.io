@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mohamad | Software & Reverse Engineer</title>
+
+<style>
+/* === RESET AND FONTS === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0b0f14;
+  color: #e2e2e2;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* === BACKGROUND PARTICLES === */
+#bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background: radial-gradient(circle at bottom, #0d1823, #000);
+  overflow: hidden;
+}
+
+/* === NAVBAR === */
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  background: rgba(10,10,18,0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 6%;
+  z-index: 10;
+  border-bottom: 1px solid transparent;
+  transition: all 0.4s ease;
+}
+nav.scrolled {
+  border-bottom: 1px solid rgba(0,255,200,0.2);
+}
+nav h1 {
+  font-family: 'JetBrains Mono', monospace;
+  color: #00ffc3;
+  font-size: 1.3rem;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+}
+nav ul li {
+  margin-left: 1.5em;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #e2e2e2;
+  transition: 0.3s;
+}
+nav ul li a:hover {
+  color: #00ffc3;
+  text-shadow: 0 0 8px #00ffc3;
+}
+
+/* === HERO SECTION === */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.hero h2 {
+  font-size: 2.6rem;
+  margin-bottom: 0.5em;
+}
+.hero h2 span {
+  color: #00ffc3;
+}
+.hero p {
+  color: #b5b5b5;
+  max-width: 600px;
+  line-height: 1.6em;
+}
+.hero .btn {
+  margin-top: 1.5em;
+  padding: 0.8em 1.6em;
+  border: 2px solid #00ffc3;
+  color: #00ffc3;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: 0.3s;
+}
+.hero .btn:hover {
+  background: #00ffc3;
+  color: #000;
+  box-shadow: 0 0 15px #00ffc3;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === SECTIONS GENERAL === */
+section {
+  padding: 5em 10%;
+  position: relative;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+h2.section-title {
+  font-size: 2rem;
+  color: #00ffc3;
+  margin-bottom: 1em;
+  border-left: 4px solid #00ffc3;
+  padding-left: 0.5em;
+}
+
+/* === ABOUT === */
+.about p {
+  color: #cfd1d0;
+  line-height: 1.7em;
+  font-size: 1.1em;
+  max-width: 800px;
+}
+
+/* === SKILLS === */
+.skills .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+  gap: 1em;
+}
+.skill {
+  background: rgba(20,25,35,0.9);
+  text-align: center;
+  padding: 1em;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-family: 'JetBrains Mono', monospace;
+  transition: 0.3s;
+}
+.skill:hover {
+  border-color: #00ffc3;
+  box-shadow: 0 0 15px rgba(0,255,195,0.15);
+  transform: translateY(-3px);
+}
+
+/* === PROJECTS === */
+.projects .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 1.5em;
+}
+.project {
+  background: rgba(20,25,35,0.8);
+  padding: 1.5em;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+}
+.project:hover {
+  border-color: #00ffc3;
+  box-shadow: 0 0 20px rgba(0,255,195,0.15);
+  transform: translateY(-5px);
+}
+.project h3 {
+  color: #00ffc3;
+  margin-bottom: 0.5em;
+}
+
+/* === CONTACT === */
+.contact .socials {
+  margin-top: 1.5em;
+}
+.contact .socials a {
+  color: #00ffc3;
+  margin: 0 1em;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.contact .socials a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px #00ffc3;
+}
+
+footer {
+  text-align: center;
+  padding: 2em;
+  font-size: 0.9em;
+  color: #777;
+}
+
+/* === PARTICLE STYLE === */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0,255,195,0.5);
+  pointer-events: none;
+  animation: float 6s linear infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-100vh) scale(0.2); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="bg"></div>
+
+<nav id="navbar">
+  <h1>Mohamad_2006</h1>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h2>Hello, I'm <span>Mohamad</span></h2>
+  <p>Software Engineer · Reverse Engineer · Pentester · Science Enthusiast</p>
+  <a href="#projects" class="btn">Explore My Work</a>
+</section>
+
+<section id="about" class="about">
+  <h2 class="section-title">About Me</h2>
+  <p>
+    I'm Mohamad, born in 2006 in Diyala, Iraq. Passionate about building, breaking, and understanding digital systems,
+    I specialize in software engineering, reverse engineering, and pentesting.
+    <br><br>
+    Beyond code, I enjoy exploring physics, biology, chemistry, and computer science — seeking how patterns connect between information and nature.
+  </p>
+</section>
+
+<section id="skills" class="skills">
+  <h2 class="section-title">Skills</h2>
+  <div class="grid">
+    <div class="skill">C / C++</div>
+    <div class="skill">Python</div>
+    <div class="skill">Assembly</div>
+    <div class="skill">Reverse Engineering</div>
+    <div class="skill">Pentesting</div>
+    <div class="skill">Web Development</div>
+    <div class="skill">AI / ML Basics</div>
+  </div>
+</section>
+
+<section id="projects" class="projects">
+  <h2 class="section-title">Projects</h2>
+  <div class="cards">
+    <div class="project">
+      <h3>Binary Analyzer</h3>
+      <p>A lightweight static analysis tool for ELF binaries with disassembly insights.</p>
+    </div>
+    <div class="project">
+      <h3>Network Monitor</h3>
+      <p>Real-time packet tracking and visualization for ethical hacking practice.</p>
+    </div>
+    <div class="project">
+      <h3>Physics Simulator</h3>
+      <p>Experimental simulation tool exploring motion and energy transfer systems.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2 class="section-title">Contact</h2>
+  <p>Let's collaborate or exchange ideas about tech and science!</p>
+  <div class="socials">
+    <a href="#" target="_blank">GitHub</a>
+    <a href="#" target="_blank">LinkedIn</a>
+    <a href="mailto:example@email.com">Email</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Mohamad — Crafted with curiosity ⚡
+</footer>
+
+<script>
+/* === Navbar scroll effect === */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if(window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+/* === Section scroll reveal === */
+const sections = document.querySelectorAll('section');
+const revealSection = () => {
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      sec.classList.add('visible');
+    }
+  });
+};
+window.addEventListener('scroll', revealSection);
+window.addEventListener('load', revealSection);
+
+/* === Floating Particles Background === */
+const bg = document.getElementById('bg');
+for (let i = 0; i < 50; i++) {
+  const part = document.createElement('div');
+  const size = Math.random() * 4 + 2;
+  part.classList.add('particle');
+  part.style.width = size + 'px';
+  part.style.height = size + 'px';
+  part.style.left = Math.random() * 100 + '%';
+  part.style.top = Math.random() * 100 + '%';
+  part.style.animationDuration = (4 + Math.random() * 4) + 's';
+  part.style.animationDelay = Math.random() * 4 + 's';
+  bg.appendChild(part);
+}
+</script>
+
+</body>
+</html>
