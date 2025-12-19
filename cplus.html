@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful - Cinemana Plus</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #161616;
+            --primary-red: #e50914;
+            --primary-red-hover: #b20710;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+            --border-color: #333;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            font-family: var(--font-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        /* --- LAYOUT --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.7) 10%, transparent);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* --- COMPONENTS --- */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        .logo span { color: var(--text-white); }
+
+        .success-card {
+            background-color: var(--card-bg);
+            padding: 60px 40px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px auto;
+            color: var(--primary-red);
+        }
+
+        .icon-check {
+            font-size: 40px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-red);
+            color: white;
+            padding: 15px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.2s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-red-hover);
+        }
+
+        /* --- LANGUAGE SWITCHER --- */
+        .lang-switch {
+            cursor: pointer;
+            padding: 8px 16px;
+            border: 1px solid var(--text-white);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .lang-switch:hover {
+            background-color: var(--text-white);
+            color: var(--bg-color);
+        }
+
+        /* --- ARABIC SPECIFIC ADJUSTMENTS --- */
+        html[dir="rtl"] {
+            font-family: 'Tahoma', 'Segoe UI', sans-serif;
+        }
+        
+        html[dir="rtl"] .logo {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* --- ANIMATION --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Cinemana <span>Plus</span></a>
+        
+        <div class="lang-switch" onclick="toggleLanguage()" id="langBtn">
+            <span id="flagIcon">🇮🇶</span> 
+            <span id="langText">العربية</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="success-card">
+            <div class="icon-circle">
+                <span class="icon-check">✔</span>
+            </div>
+            
+            <h1 id="titleText">Registration Successful</h1>
+            <p id="descText">Your account has been created successfully. Welcome to Cinemana Plus, enjoy the ultimate streaming experience.</p>
+            
+            <a href="intent:#Intent;package=com.shabakaty.cinemana;S.browser_fallback_url=https://t.me/cinemana_plus;end" class="btn" id="btnText">Start Watching</a>
+        </div>
+    </div>
+
+    <script>
+        // --- TRANSLATION DATA ---
+        const translations = {
+            en: {
+                title: "Registration Successful",
+                desc: "Your account has been created successfully. Welcome to Cinemana Plus, enjoy the ultimate streaming experience.",
+                btn: "Start Watching",
+                langBtnLabel: "العربية",
+                langBtnFlag: "🇮🇶"
+            },
+            ar: {
+                title: "تم التسجيل بنجاح",
+                desc: "تم إنشاء حسابك بنجاح. أهلاً بك في سينمانا بلس، استمتع بأفضل تجربة مشاهدة.",
+                btn: "ابدأ المشاهدة",
+                langBtnLabel: "English",
+                langBtnFlag: "🇺🇸"
+            }
+        };
+
+        // --- STATE ---
+        let currentLang = 'en';
+
+        // --- DOM ELEMENTS ---
+        const titleEl = document.getElementById('titleText');
+        const descEl = document.getElementById('descText');
+        const btnEl = document.getElementById('btnText');
+        const langLabelEl = document.getElementById('langText');
+        const flagIconEl = document.getElementById('flagIcon');
+        const htmlEl = document.documentElement;
+
+        // --- FUNCTION TO TOGGLE LANGUAGE ---
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const content = translations[currentLang];
+
+            // Re-trigger Animation
+            const card = document.querySelector('.success-card');
+            card.style.animation = 'none';
+            card.offsetHeight; /* trigger reflow */
+            card.style.animation = 'fadeIn 0.5s ease-out';
+
+            // Update Text
+            titleEl.textContent = content.title;
+            descEl.textContent = content.desc;
+            btnEl.textContent = content.btn;
+            
+            // Update Switcher
+            langLabelEl.textContent = content.langBtnLabel;
+            flagIconEl.textContent = content.langBtnFlag;
+
+            // Update Direction
+            if (currentLang === 'ar') {
+                htmlEl.setAttribute('dir', 'rtl');
+                htmlEl.setAttribute('lang', 'ar');
+            } else {
+                htmlEl.setAttribute('dir', 'ltr');
+                htmlEl.setAttribute('lang', 'en');
+            }
+        }
+    </script>
+</body>
+</html>
